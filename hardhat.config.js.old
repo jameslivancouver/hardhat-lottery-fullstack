@@ -1,0 +1,131 @@
+// require("@nomiclabs/hardhat-waffle")
+// require("@nomiclabs/hardhat-etherscan")
+// require("hardhat-deploy")
+// require("solidity-coverage")
+// require("hardhat-gas-reporter")
+// require("hardhat-contract-sizer")
+// require("@appliedblockchain/chainlink-plugins-fund-link")
+// require("dotenv").config()
+
+// const RINKEBY_RPC_URL =
+//     process.env.RINKEBY_RPC_URL ||
+//     "https://eth-rinkeby.alchemyapi.io/v2/qhIqTCTCGE2UFsmeZlWq8Bi1NpfY_PGl"
+
+// const PRIVATE_KEY = process.env.PRIVATE_KEY
+
+// const ETHERSCAN_API_KEY = process.env.ETHERSCAN_API_KEY || "RSAUDTAVB36QJUKFKKS3AZIH9SP2DFNTZK"
+// const COINMARKETCAP_API_KEY = process.env.COINMARKETCAP_API_KEY
+// const REPORT_GAS = process.env.REPORT_GAS || false
+
+// module.exports = {
+//     defaultNetwork: "hardhat",
+//     networks: {
+//         rinkeby: {
+//             url: RINKEBY_RPC_URL,
+//             accounts: PRIVATE_KEY !== undefined ? [PRIVATE_KEY] : [],
+//             saveDeployments: true,
+//             chainId: 4,
+//         },
+//     },
+//     // etherscan: {
+//     //     // yarn hardhat verify --network <NETWORK> <CONTRACT_ADDRESS> <CONSTRUCTOR_PARAMETERS>
+//     //     apiKey: {
+//     //         rinkeby: ETHERSCAN_API_KEY,
+//     //     },
+//     //     customChains: [
+//     //         {
+//     //             network: "rinkeby",
+//     //             chainId: 4,
+//     //             urls: {
+//     //                 apiURL: "https://api-rinkeby.etherscan.io/api",
+//     //                 browserURL: "https://rinkeby.etherscan.io",
+//     //             },
+//     //         },
+//     //     ],
+//     // },
+//     // etherscan: {
+//     //     // Your API key for Etherscan
+//     //     // Obtain one at https://etherscan.io/
+//     //     apiKey: ETHERSCAN_API_KEY,
+//     // },
+//     gasReporter: {
+//         enabled: REPORT_GAS,
+//         currency: "USD",
+//         outputFile: "gas-report.txt",
+//         noColors: true,
+//         coinmarketcap: COINMARKETCAP_API_KEY,
+//     },
+//     etherscan: {
+//         apiKey: process.env.ETHERSCAN_API_KEY,
+//     },
+//     contractSizer: {
+//         runOnCompile: false,
+//         only: ["Raffle"],
+//     },
+//     namedAccounts: {
+//         deployer: {
+//             default: 0,
+//             4: 0,
+//         },
+//         player: {
+//             default: 1,
+//         },
+//     },
+//     solidity: {
+//         compilers: [
+//             {
+//                 version: "0.8.7",
+//             },
+//         ],
+//     },
+//     mocha: {
+//         timeout: 200000,
+//     },
+// }
+
+require("@nomiclabs/hardhat-waffle")
+require("@nomiclabs/hardhat-etherscan")
+require("hardhat-deploy")
+require("solidity-coverage")
+require("hardhat-gas-reporter")
+require("hardhat-contract-sizer")
+require("@appliedblockchain/chainlink-plugins-fund-link")
+require("dotenv").config()
+
+module.exports = {
+    solidity: {
+        compilers: [
+            {
+                version: "0.8.7",
+            },
+        ],
+    },
+    defaultNetwork: "hardhat",
+    networks: {
+        rinkeby: {
+            url: process.env.RINKEBY_URL || "",
+            accounts: process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+            chainId: 4,
+            blockConfirmations: 6,
+        },
+    },
+    gasReporter: {
+        enabled: process.env.REPORT_GAS !== undefined ? true : false,
+        coinmarketcap: process.env.COINMARKETCAP_API_KEY,
+        currency: "USD",
+        token: "ETH",
+        // token: "MATIC",
+        // outputFile: "gasreport.txt",
+        // noColors: true,
+    },
+    etherscan: {
+        apiKey: process.env.ETHERSCAN_API_KEY,
+    },
+    namedAccounts: {
+        deployer: {
+            default: 0,
+            31337: 0,
+            4: 0,
+        },
+    },
+}
